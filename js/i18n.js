@@ -78,6 +78,6 @@
     applyStatic();
   }
 
-  window.RFI18N = { t, get current() { return current; }, boot, setLang };
+  window.RFI18N = { t, applyStatic, get current() { return current; }, boot, setLang };
   boot();
 })();
