@@ -15,9 +15,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run business-logic tests (zero dependencies)
-        run: node --test tests/*.test.js
-      - name: Guard — no secrets committed
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Typecheck (TypeScript strict)
+        run: npx tsc --noEmit
+      - name: Run unit tests (vitest)
+        run: npm test
+      - name: Guard - no secrets committed
         run: |
-          ! grep -rniE '(api[_-]?key|secret|password)\s*[:=]' js/ locales/ *.json 2>/dev/null || true
+          if grep -rniE '(api[_-]?key|secret|password)[[:space:]]*[:=]' src/ public/locales/ 2>/dev/null; then exit 1; fi
           echo "ok: no secrets found"

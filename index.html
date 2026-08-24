@@ -5,110 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DebtFree — snowball payoff planner</title>
   <meta name="description" content="Snowball & avalanche debt payoff planner with month-by-month chart. Free, private, offline-first PWA. No signup." />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#059669" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23059669'/%3E%3Cpath d='M50 78c15.5 0 28-12.5 28-28S65.5 22 50 22 22 34.5 22 50s12.5 28 28 28z' fill='%23fff'/%3E%3Cpath d='M36 52l9 9 19-21' stroke='%23059669' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">D</span>
-      <span class="name">DebtFree</span>
-    </div>
-    <div class="controls">
-      <label class="sr-only" for="currency-select">Currency</label>
-      <select id="currency-select" title="Currency">
-        <option value="USD|en-US">USD $</option>
-        <option value="EUR|de-DE">EUR €</option>
-        <option value="GBP|en-GB">GBP £</option>
-        <option value="BRL|pt-BR">BRL R$</option>
-        <option value="JPY|ja-JP">JPY ¥</option>
-        <option value="INR|en-IN">INR ₹</option>
-      </select>
-      <select id="lang-select" title="Language"></select>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1 data-i18n="hero.title">A plan to be debt-free, month by month</h1>
-      <p data-i18n="hero.subtitle">List your debts, pick snowball or avalanche, and see exactly when each one dies — and how much interest the right strategy saves. Free, private, offline.</p>
-    </section>
-
-    <div class="toolbar no-print">
-      <button id="btn-sample" class="btn ghost" data-i18n="sample.load">Load example</button>
-      <button id="btn-clear" class="btn ghost danger" data-i18n="actions.clear">Clear all</button>
-      <span class="spacer"></span>
-      <button id="btn-print" class="btn primary" data-i18n="actions.print">Save PDF</button>
-    </div>
-
-    <div class="layout">
-      <!-- ============ INPUT ============ -->
-      <section class="col-inputs no-print">
-        <fieldset class="card">
-          <legend data-i18n="debts.heading">Your debts</legend>
-          <div id="debts-list"></div>
-          <button type="button" id="debts-add" class="btn ghost add-btn" data-i18n="debts.add">+ Add debt</button>
-        </fieldset>
-
-        <fieldset class="card">
-          <legend data-i18n="settings.heading">Strategy</legend>
-          <label class="radio-row">
-            <input type="radio" name="strategy" value="snowball" checked />
-            <span><strong data-i18n="strategy.snowball">Snowball — smallest balance first</strong>
-            <small data-i18n="strategy.snowballHint">Quick wins keep you motivated. You pay a little more interest, but momentum is real.</small></span>
-          </label>
-          <label class="radio-row">
-            <input type="radio" name="strategy" value="avalanche" />
-            <span><strong data-i18n="strategy.avalanche">Avalanche — highest APR first</strong>
-            <small data-i18n="strategy.avalancheHint">Mathematically cheapest: attacks the most expensive debt first.</small></span>
-          </label>
-          <label class="extra-label"><span data-i18n="extra.label">Extra monthly payment</span>
-            <input type="number" id="extra-input" min="0" step="10" placeholder="100" />
-          </label>
-        </fieldset>
-      </section>
-
-      <!-- ============ RESULTS ============ -->
-      <section class="col-results">
-        <div class="stat-cards">
-          <div class="card stat">
-            <h2 data-i18n="summary.debtFreeIn">Debt-free in</h2>
-            <p class="stat-num"><span id="st-months">–</span></p>
-            <p class="stat-sub" data-i18n="summary.budget">Monthly budget</p>
-            <p class="stat-val" id="st-budget">–</p>
-          </div>
-          <div class="card stat">
-            <h2 data-i18n="summary.interest">Total interest</h2>
-            <p class="stat-num"><span id="st-interest">–</span></p>
-            <p class="stat-sub" data-i18n="summary.savedVsMin">vs minimum-only</p>
-            <p class="stat-val" id="st-saved">–</p>
-          </div>
-        </div>
-
-        <section class="card">
-          <h2 data-i18n="chart.heading">Balance over time</h2>
-          <svg id="chart" viewBox="0 0 560 240" role="img" aria-label="Balance over time chart"></svg>
-        </section>
-
-        <section class="card">
-          <h2 data-i18n="order.heading">Payoff order</h2>
-          <ol id="payoff-order" class="order-list"></ol>
-          <p id="plan-warning" class="warning hidden" data-i18n="plan.impossible"></p>
-        </section>
-      </section>
-    </div>
-  </main>
-
-  <footer class="foot no-print">
-    <p data-i18n="footer.privacy">100% in your browser. No account, no server, no telemetry — your numbers never leave this device.</p>
-    <p class="muted">Built by <a href="https://github.com/chr-z">@chr-z</a> · MIT</p>
-  </footer>
-
-  <input type="file" id="import-file" accept="application/json,.json" hidden />
-
-  <script src="js/i18n.js"></script>
-  <script type="module" src="js/app.js"></script>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

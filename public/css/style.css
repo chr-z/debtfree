@@ -1,0 +1,191 @@
+/* DebtFree — clean, print-aware, a11y-friendly. */
+:root {
+  --bg: #f4f7f5;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --brand: #059669;
+  --brand-dark: #047857;
+  --brand-soft: #ecfdf5;
+  --danger: #dc2626;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; }
+.logo {
+  display: inline-flex;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.controls { display: flex; gap: 0.4rem; }
+.controls select {
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: inherit;
+}
+
+/* ---------- hero ---------- */
+.hero { text-align: center; padding: 1.8rem 1rem 0.6rem; max-width: 60rem; margin: 0 auto; }
+.hero h1 { margin: 0 0 0.4rem; font-size: clamp(1.4rem, 3.5vw, 2.1rem); letter-spacing: -0.02em; }
+.hero p { margin: 0 auto; color: var(--muted); max-width: 44rem; }
+
+/* ---------- layout ---------- */
+main { padding: 1rem 1.2rem 2rem; max-width: 74rem; margin: 0 auto; }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+fieldset.card legend { font-weight: 700; padding: 0 0.4rem; }
+.card h2 { margin: 0.1rem 0 0.7rem; font-size: 1.02rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); gap: 0.55rem 0.8rem; }
+label { display: block; font-size: 0.86rem; color: var(--muted); }
+label.wide { grid-column: 1 / -1; }
+label span { display: block; margin-bottom: 0.25rem; font-weight: 600; color: var(--ink); font-size: 0.8rem; }
+input[type="text"], input[type="number"], textarea {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+}
+input:focus-visible, button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+.item { border-top: 1px dashed var(--line); padding-top: 0.8rem; margin-top: 0.8rem; }
+.item:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+.item .remove-btn { margin-top: 0.5rem; }
+
+/* ---------- toolbar & buttons ---------- */
+.toolbar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; max-width: 74rem; margin: 0.6rem auto 0; }
+.toolbar .spacer { flex: 1; }
+.btn {
+  border: 1px solid transparent;
+  border-radius: 9px;
+  padding: 0.45rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn.primary { background: var(--brand); color: #fff; }
+.btn.primary:hover { background: var(--brand-dark); }
+.btn.ghost { background: transparent; border-color: var(--line); color: inherit; }
+.btn.ghost:hover { background: var(--brand-soft); }
+.btn.ghost.danger { color: var(--danger); }
+.btn.sm { padding: 0.3rem 0.65rem; font-size: 0.85rem; }
+.add-btn { width: 100%; margin-top: 0.6rem; border-style: dashed; }
+
+/* ---------- strategy radios ---------- */
+.radio-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.55rem;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.radio-row:hover { background: var(--brand-soft); }
+.radio-row input { margin-top: 0.25rem; accent-color: var(--brand); }
+.radio-row strong { display: block; color: var(--ink); font-size: 0.92rem; }
+.radio-row small { color: var(--muted); }
+.extra-label { margin-top: 0.7rem; }
+
+/* ---------- stat cards ---------- */
+.stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .stat-cards { grid-template-columns: 1fr; } }
+.stat { text-align: center; margin-bottom: 1rem; }
+.stat h2 { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+.stat-num { margin: 0; font-size: 2.1rem; font-weight: 800; color: var(--brand-dark); letter-spacing: -0.02em; }
+.stat-sub { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.stat-val { margin: 0; font-weight: 700; }
+
+/* ---------- chart & order ---------- */
+#chart { width: 100%; height: auto; }
+.order-list { margin: 0; padding-left: 1.4rem; }
+.order-list li { margin-bottom: 0.35rem; font-weight: 600; }
+.order-list li.first::marker { color: var(--brand); content: "★ "; font-size: 1.1em; }
+.order-list li.empty { font-weight: 400; color: var(--muted); list-style: none; margin-left: -1.4rem; }
+.warning {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: 9px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.88rem;
+}
+.hidden { display: none; }
+
+/* ---------- footer ---------- */
+.foot { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 1rem; border-top: 1px solid var(--line); }
+.muted { opacity: 0.75; }
+.foot a { color: inherit; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- print: plan summary only ---------- */
+@media print {
+  body { background: #fff; }
+  .topbar, .hero, .toolbar, .col-inputs, .no-print, .foot { display: none !important; }
+  main { padding: 0; max-width: none; }
+  .layout { display: block; }
+  .stat-num { color: #047857; }
+  @page { margin: 1.6cm; }
+}

@@ -11,7 +11,7 @@
 [![Deploy](https://github.com/chr-z/debtfree/actions/workflows/pages.yml/badge.svg)](https://github.com/chr-z/debtfree/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-059669.svg)](LICENSE)
 [![i18n](https://img.shields.io/badge/i18n-EN%20%7C%20PT--BR-blueviolet)](#internationalization--internacionaliza%C3%A7%C3%A3o)
-[![No deps](https://img.shields.io/badge/runtime%20deps-0-37d67a)](package.json)
+[![Svelte 5](https://img.shields.io/badge/Svelte-5%20runes-ff3e00)](https://svelte.dev)
 [![PWA](https://img.shields.io/badge/PWA-installable-9cf)](manifest.json)
 
 🔗 **Live demo → [chr-z.github.io/debtfree](https://chr-z.github.io/debtfree/)** · no signup, works offline after first load
@@ -66,7 +66,7 @@ until every balance hits zero (or the plan is declared impossible)
 The engine is honest about failure: if accrued interest ever outgrows the budget it returns
 `impossible` instead of simulating forever. The savings baseline amortizes each loan
 independently with frozen minimums — the textbook "minimum payments trap". Every formula is
-covered by **13 unit tests** running on Node's built-in test runner in CI.
+covered by **23 unit tests** (Vitest) running in CI.
 
 ## 🚀 Quick start
 
@@ -111,14 +111,21 @@ reduced-motion support, and color pairs tested for WCAG AA contrast.
 
 ## 🏗️ Tech notes
 
-Vanilla JS ES modules, **zero runtime dependencies** (~14 KB of app code). Payoff math lives
-in [`js/core.js`](js/core.js) as pure functions — tested with Node's built-in runner:
+**Built with [Svelte 5](https://svelte.dev) (runes) + TypeScript strict + Vite.** The payoff
+math lives in [`src/lib/core.ts`](src/lib/core.ts) as pure, framework-free functions — the UI is
+a thin reactive layer over a single `$state` rune store (`state.svelte.ts`), so the simulation
+stays 100% unit-testable:
 
 ```bash
-node --test tests/*.test.js   # 13 tests, no npm install needed
+npm install
+npx vitest run      # 23 tests across engine, chart geometry and helpers
+npx tsc --noEmit    # strict typecheck (noUncheckedIndexedAccess on)
+npm run build       # typecheck + production bundle
 ```
 
-Deployed as a static site on GitHub Pages (CI runs tests before publishing).
+Deployed as a static site on GitHub Pages — CI runs tests and the Svelte/Vite build before
+publishing, and stamps the service worker cache with the commit SHA so PWA clients update
+immediately.
 
 ## Internationalization / Internacionalização
 
