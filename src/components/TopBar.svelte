@@ -40,4 +40,6 @@
       {/each}
     </select>
   </div>
+    <a href="upgrade.html" style="margin-left:.6rem;padding:.38rem .85rem;border-radius:8px;background:#059669;color:#fff;font-weight:700;text-decoration:none;font-size:.85rem;white-space:nowrap">{t('nav.pro')}</a>
+
 </header>

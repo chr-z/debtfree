@@ -12,5 +12,10 @@
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
+  <script>
+    // Pay Module: CONFIG antes do pay.js (o IIFE lê na execução).
+    window.PAY_CONFIG = { product: 'debtfree', plan: 'pro', apiBase: 'https://chrz-dev.pages.dev', verifyKey: '' };
+  </script>
+  <script src="js/pay.js"></script>
 </body>
 </html>
